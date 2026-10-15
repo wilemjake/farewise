@@ -1,6 +1,6 @@
 {
-  "name": "FareSG - Compare Grab, Gojek, TADA & Taxi Live",
-  "description": "Compare live fares and pickup times across Grab, Gojek, TADA and Taxi in Singapore. Always book the fastest ride at the lowest price with Shopback cashbacks.",
+  "name": "FareWise - Compare Grab, Gojek, TADA & Taxi Live",
+  "description": "FareWise compares live fares and pickup times across Grab, Gojek, TADA and Taxi in Singapore. Always book the fastest ride at the lowest price with Shopback cashbacks.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

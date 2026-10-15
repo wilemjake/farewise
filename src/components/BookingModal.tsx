@@ -157,7 +157,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             {/* Zero Cost Guarantee & Driver Commission Notice */}
             <div className="text-[11px] text-slate-500 bg-slate-950/30 p-2.5 rounded-lg border border-slate-800/60 leading-relaxed">
-              <strong className="text-slate-400">No Extra Fare Guarantee:</strong> FareSG charges zero markup on top of ride operator rates. Fares are directly dispatched to {ride.providerName}.
+              <strong className="text-slate-400">No Extra Fare Guarantee:</strong> FareWise charges zero markup on top of ride operator rates. Fares are directly dispatched to {ride.providerName}.
             </div>
 
             {/* Modal Actions */}

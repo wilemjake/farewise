@@ -9,19 +9,19 @@ import { RideComparisonList } from './components/RideComparisonList';
 import { SingaporeMap } from './components/SingaporeMap';
 import { SurgeInsights } from './components/SurgeInsights';
 import { TripHistory } from './components/TripHistory';
-import { DriverPartnerInsight } from './components/DriverPartnerInsight';
+import { DriverPortal } from './components/DriverPortal';
 import { BookingModal } from './components/BookingModal';
 import { ShopbackModal } from './components/ShopbackModal';
 
 export default function App() {
-  // Navigation tab state
+  // Navigation tab state: 'compare', 'map', 'surge', 'history' are for riders. 'driver' is a separate portal.
   const [activeTab, setActiveTab] = useState<'compare' | 'map' | 'surge' | 'history' | 'driver'>('compare');
 
   // Route points
   const [origin, setOrigin] = useState<LocationPoint>(SINGAPORE_LOCATIONS[0]); // MBS
   const [destination, setDestination] = useState<LocationPoint>(SINGAPORE_LOCATIONS[1]); // Changi Airport T3
 
-  // Filters & Sorting
+  // Filters & Sorting for riders
   const [selectedCategory, setSelectedCategory] = useState<VehicleCategory>('all');
   const [selectedSort, setSelectedSort] = useState<SortMode>('cheapest');
 
@@ -162,7 +162,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6">
-        {/* Main Compare View */}
+        {/* Primary Page (strictly for riders) */}
         {activeTab === 'compare' && (
           <div>
             <HeroBanner
@@ -170,7 +170,7 @@ export default function App() {
                 const searchEl = document.getElementById('search-panel');
                 searchEl?.scrollIntoView({ behavior: 'smooth' });
               }}
-              onOpenDriverInsight={() => setActiveTab('driver')}
+              onExploreRadar={() => setActiveTab('map')}
             />
 
             <div id="search-panel">
@@ -247,7 +247,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Route Radar Full Map View */}
+        {/* Route Radar Full Map View (Rider) */}
         {activeTab === 'map' && (
           <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
@@ -296,12 +296,12 @@ export default function App() {
           </div>
         )}
 
-        {/* Surge Watch View */}
+        {/* Surge Watch View (Rider) */}
         {activeTab === 'surge' && (
           <SurgeInsights trafficContext={trafficContext} />
         )}
 
-        {/* Trip History View */}
+        {/* Trip History View (Rider) */}
         {activeTab === 'history' && (
           <TripHistory
             trips={trips}
@@ -310,9 +310,9 @@ export default function App() {
           />
         )}
 
-        {/* Driver Partner Insights View */}
+        {/* Separate Driver Partner Portal (kept as a separate login & dashboard) */}
         {activeTab === 'driver' && (
-          <DriverPartnerInsight />
+          <DriverPortal onBackToRider={() => setActiveTab('compare')} />
         )}
       </main>
 
@@ -337,7 +337,7 @@ export default function App() {
       <footer className="mt-auto border-t border-slate-900 bg-slate-950 py-8 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            <span className="font-bold text-slate-400">FareSG</span> · Singapore Ride Comparison Engine
+            <span className="font-bold text-slate-400">FareWise</span> · Singapore Ride Comparison Engine
           </div>
 
           <div className="flex items-center gap-4 text-slate-400">
@@ -349,7 +349,12 @@ export default function App() {
           </div>
 
           <div>
-            Built with zero markup for riders & drivers
+            <button
+              onClick={() => setActiveTab('driver')}
+              className="text-slate-400 hover:text-emerald-400 transition-colors underline underline-offset-4"
+            >
+              Driver Partner Portal Login
+            </button>
           </div>
         </div>
       </footer>
